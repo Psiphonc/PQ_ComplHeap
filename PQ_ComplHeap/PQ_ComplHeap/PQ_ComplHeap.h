@@ -13,6 +13,7 @@ public:
 	void insert(T const& e);
 	T delMax();
 	T getMax() const { return Vector<T>::elem_[0]; }
+	void heapSort();
 private:
 	int percolateUp(int loc);
 	int percolateDown(int n, int loc);
@@ -40,6 +41,16 @@ T PQ_ComplHeap<T>::delMax()
 	Vector<T>::elem_[0] = Vector<T>::elem_[--Vector<T>::size_];
 	percolateDown(Vector<T>::size_, 0);
 	return temp;
+}
+
+template <typename T>
+void PQ_ComplHeap<T>::heapSort()
+{
+	while (!this->empty())
+	{
+		std::swap(this->elem_[0], this->elem_[--this->size_]);
+		percolateDown(Vector<T>::size_, 0);
+	}
 }
 
 template <typename T>
